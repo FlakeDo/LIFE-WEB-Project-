@@ -1,34 +1,23 @@
 # WEB-Project
 Carried out as a stuying project. The final website will contain HTML, CSS, JS, PHP and AJAX elements.
 
-# Roadmap
-
 \---
 
-## 1\. Phase de Préparation (Semaine 1 - 3 jours)
+## Architecture
 
-### Objectifs
+### Objective
 
-* Comprendre les attentes et les contraintes.
-* Définir une idée de projet **concrète et réalisable** (sans solution technique détaillée).
-* Organiser le travail en binôme.
+Site qui retrace les différentes périodes ayant eu lieu sur Terre après l'apparition de la vie sur cette dernière. Des petites activités diverses et un jeu multijoueur seront présentes sur le site.
 
-### Étapes
+### Main functionnalities
 
-* **Brainstorming** : Trouvez une idée liée au thème **"histoire(s)"** qui permet :
+* **Déplacment entre les époques** : La navigation entre les époques se fera via une montre/horloge accessible depuis chaque page du site : les périodes seront délimitées dans l'ordre sur le quadrant de la montre et la position de l'aiguille déterminera l'époque de destination.
+* **Peuplement des époques (si le temps le permet)** : Placer des images de petites créatures en cliquant sur le site pour "peupler" l'époque. Les créatures ne cacheront pas l'information utile du site (les textes), seront différentes entre les époques, seront vu par les autres utilisateurs du site, et disparaitront après un certain temps. Elles apparaitront à une certaine position, à un angle aléatoire compris entre 45° et -45°.
+* **Jeu d'esquive des oiseaux (déjà réalisé en js)** : Petit jeu où il faut esquiver des oiseaux en se déplaçant sur trois voies.
+* **Test de personnalité préhistorique (formulaire php)** : Faire une sorte de test de personnalité via un formulaire (pour savoir à quelle catégorie d'animal tu correspondrais lors de l'époque des dinosaures par exemple)
+* **Tableaux des scores** : Les mini-jeux auront un tableau des scores où les joueurs pourront comparer leur score avec celui des autres joueurs.
 
-  * L’interaction entre utilisateurs en temps réel (ex : collaboration, visualisation partagée, actions synchronisées).
-  * L’utilisation de toutes les technologies demandées (HTML/CSS/JS/PHP/AJAX).
-
-
-
-===
-
-Site qui retrace les différentes périodes ayant eu lieu sur Terre après l'apparition de la vie sur cette dernière.
-
-===
-
-
+ JE CONTINUE LE RESTE ENSUITE
 
 * **Définir les fonctionnalités principales** (3-4 max) :
 
