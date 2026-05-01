@@ -1,15 +1,15 @@
- /* ---- Variables & reset ---- */
+ /* Couleurs utilisées dans le jeu */
   :root {
-    --bg:       #1a1a14;
-    --surface:  #2a2a1e;
-    --border:   #4a4a30;
-    --text:     #e8e0c8;
-    --dim:      #888070;
-    --accent:   #c8a840;
-    --danger:   #c84030;
-    --protect:  #40a860;
-    --card-bg:  #32301e;
-    --card-hidden: #222218;
+    --bg:       #1a1a14;  /* Arrière plan */
+    --sub-bg:  #2a2a1e;  /* Arrière plan des sous-sections de la page */
+    --sub-border:   #4a4a30;  /* Bordure des sous-sections */
+    --text:     #e8e0c8;  /* Couleur du texte */
+    --labels:      #888070;  /* Couleur des labels */
+    --accent:   #c8a840;  /* Surbrillance */
+    --dmgs:   #c84030;  /* Dégats subits */
+    --protect:  #40a860;  /* Protection */
+    --card-bg:  #32301e;  /* Arrière plan de la carte du joueur actuel */
+    --card-hidden: #222218; /* Arrière plan des cartes cachées */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -24,58 +24,68 @@
     gap: 20px;
   }
   h1 { font-size: 2rem; letter-spacing: .15em; color: var(--accent); }
-  h2 { font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+  h2 { font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; color: var(--labels); margin-bottom: 10px; }
 
-  /* ---- Layout sections ---- */
+
+  /* CRÉATION DES DEUX ÉTATS (PRÉPARATION DE PARTIE ET EN PARTIE) */
   #setup, #game { width: 100%; max-width: 700px; }
   #setup { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
   #game  { display: none; flex-direction: column; gap: 16px; }
 
-  /* ---- Setup ---- */
-  #setup label { color: var(--dim); font-size: .9rem; }
+
+  /* PRÉPARATION DE PARTIE */
+  #setup label { color: var(--labels); font-size: .9rem; }
+
   #setup input[type=number] {
     width: 60px; text-align: center;
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
     color: var(--text); padding: 6px; font-size: 1rem; border-radius: 4px;
   }
+
   #name-inputs { display: flex; flex-direction: column; gap: 6px; width: 220px; }
   #name-inputs input {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
     color: var(--text); padding: 6px 10px; border-radius: 4px; font-size: .95rem;
   }
 
-  /* ---- Buttons ---- */
+
+  /* Paramètrage des boutons */
   button {
-    cursor: pointer; border: 1px solid var(--border);
-    background: var(--surface); color: var(--text);
+    cursor: pointer; border: 1px solid var(--sub-border);
+    background: var(--sub-bg); color: var(--text);
     padding: 8px 18px; border-radius: 4px; font-size: .9rem;
     transition: background .15s, border-color .15s;
   }
-  button:hover { background: var(--border); border-color: var(--accent); }
+  button:hover { background: var(--sub-border); border-color: var(--accent); }
   button:disabled { opacity: .35; cursor: default; }
+
+  /* Bouton de démarrage de partie */
   #btn-start { background: var(--accent); color: #1a1a14; border-color: var(--accent); font-size: 1rem; padding: 10px 30px; }
+
   #btn-start:hover { background: #d4b050; }
 
-  /* ---- Phase banner ---- */
+
+  /* Bannière de phase */
   #phase-banner {
     text-align: center; font-size: .8rem; letter-spacing: .25em;
     text-transform: uppercase; color: var(--accent); padding: 6px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--sub-border);   /* Ligne de délimitation */
   }
 
-  /* ---- Players row ---- */
+  /* Section des joueurs */
   #players-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
   .player-block {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
     border-radius: 6px; padding: 10px 14px; min-width: 100px; text-align: center;
     transition: border-color .2s;
   }
   .player-block.active { border-color: var(--accent); }
-  .player-block .p-name { font-size: .8rem; color: var(--dim); margin-bottom: 4px; }
+  .player-block .p-name { font-size: .8rem; color: var(--labels); margin-bottom: 4px; }
   .player-block .p-hp   { font-size: 1.1rem; color: var(--text); }
   .player-block .p-card {
     margin-top: 6px; width: 44px; height: 60px;
-    border-radius: 5px; border: 1px solid var(--border);
+    border-radius: 5px; border: 1px solid var(--sub-border);
     display: flex; align-items: center; justify-content: center;
     font-size: 1.3rem; font-weight: bold; margin: 6px auto 0;
     background: var(--card-hidden); color: var(--card-hidden); /* hidden by default */
@@ -86,7 +96,7 @@
   .player-block .p-card.twelve      { color: var(--accent); }
   .player-block.eliminated { opacity: .4; }
 
-  /* ---- River ---- */
+  /* Rivière */
   #river-section { text-align: center; }
   #river-cards { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
   .river-card {
@@ -96,9 +106,100 @@
     font-size: 1.6rem; font-weight: bold; color: var(--accent);
   }
 
+    /* Aides au joueur */
+  #helpers { text-align: center; }
+ 
+  /* Fenêtre d'aide */
+  #helpers-display {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.70);
+    align-items: center; justify-content: center;
+    z-index: 10;
+  }
+ 
+  /* Panneau centré scrollable */
+  #helpers-panel {
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
+    border-radius: 10px; padding: 28px 32px;
+    width: min(660px, 92vw); max-height: 85vh;
+    overflow-y: auto; /* Donner la possibilité de scroller si la page est trop grande */
+    display: flex; flex-direction: column; gap: 14px;
+  }
+ 
+  /* Titre */
+  #help-title {
+    font-size: .8rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--accent); padding-bottom: 12px;
+    border-bottom: 1px solid var(--sub-border);
+    margin-bottom: 4px;
+  }
+ 
+  /* Corps */
+  #help-body { display: flex; flex-direction: column; gap: 12px; }
+  #help-body p      { color: var(--text); font-size: .9rem; line-height: 1.8; }
+  #help-body strong { color: var(--accent); }
+ 
+  .help-intro {
+    font-style: italic; color: var(--labels) !important;
+    border-left: 2px solid var(--accent); padding-left: 10px;
+  }
+  .help-section-title {
+    font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--labels); margin-top: 6px;
+  }
+  .help-phases { display: flex; flex-direction: column; gap: 8px; }
+  .help-phase {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--bg); border: 1px solid var(--sub-border);
+    border-radius: 6px; padding: 10px 14px;
+  }
+  .help-phase-num {
+    font-size: 1.1rem; font-weight: bold; color: var(--accent);
+    min-width: 24px; text-align: center; padding-top: 1px;
+  }
+  .help-phase strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .help-phase p { color: var(--labels) !important; font-size: .85rem !important; line-height: 1.6 !important; }
+  .help-warning {
+    color: var(--accent) !important; font-size: .85rem !important;
+    background: var(--bg); border: 1px solid var(--sub-border);
+    border-radius: 4px; padding: 8px 12px;
+  }
+  .help-cards { display: flex; flex-direction: column; gap: 6px; }
+  .help-card-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg); border: 1px solid var(--sub-border);
+    border-radius: 6px; padding: 10px 14px;
+    font-size: .88rem; color: var(--text); line-height: 1.6;
+    transition: border-color .15s;
+  }
+  .help-card-row:hover { border-color: var(--accent); }
+  .help-card-badge {
+    min-width: 36px; height: 36px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: bold;
+    background: var(--card-bg); color: var(--text);
+    border: 1px solid var(--sub-border); flex-shrink: 0;
+  }
+  .help-card-badge.protect { border-color: var(--protect); color: var(--protect); }
+  .help-card-badge.dmg     { border-color: var(--dmgs);    color: var(--dmgs); }
+  .help-card-badge.night   { border-color: var(--accent);  color: var(--accent); }
+  .help-river-tag {
+    display: inline-block; font-size: .7rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 3px;
+    padding: 1px 5px; margin-left: 6px; vertical-align: middle;
+  }
+  .help-dmg  { color: var(--dmgs);    font-weight: bold; }
+  .help-prot { color: var(--protect); font-weight: bold; }
+ 
+  /* Bouton fermer — toujours en bas du panneau, caché par défaut via display:none sur l'overlay */
+  #help-close { display: block; margin: 8px auto 0; }
+
+
+
   /* ---- Active player panel ---- */
   #active-panel {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
     border-radius: 6px; padding: 14px 16px;
   }
   #active-panel h2 span { color: var(--text); }
@@ -112,22 +213,22 @@
   /* ---- Log ---- */
   #log-section { }
   #log {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
     border-radius: 6px; padding: 10px 14px;
     height: 130px; overflow-y: auto;
     font-size: .85rem; line-height: 1.7;
-    color: var(--dim);
+    color: var(--labels);
   }
   #log .log-event  { color: var(--text); }
   #log .log-effect { color: var(--accent); }
-  #log .log-damage { color: var(--danger); }
+  #log .log-damage { color: var(--dmgs); }
   #log .log-protect{ color: var(--protect); }
 
   /* ---- Game over overlay ---- */
   #gameover {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,.75); align-items: center; justify-content: center;
+    background: rgba(0,0,0,.60); align-items: center; justify-content: center;
     flex-direction: column; gap: 16px; text-align: center;
   }
-  #gameover h2 { font-size: 1.4rem; color: var(--danger); letter-spacing: .1em; }
+  #gameover h2 { font-size: 1.4rem; color: var(--dmgs); letter-spacing: .1em; }
   #gameover p  { color: var(--text); font-size: 1rem; }

@@ -4,81 +4,184 @@
 
 const ui = {
   log(msg, cls = "log-event") {
-    const div = document.createElement("div");
-    div.className = cls;
-    div.textContent = msg;
-    const logEl = document.getElementById("log");
-    logEl.appendChild(div);
-    logEl.scrollTop = logEl.scrollHeight;
+    /* 
+    Gère l'affichage des événements dans la console en bas de l'écran de jeu.
+    */
+
+    const division = document.createElement("div");
+    division.className = cls;
+    division.textContent = msg;
+    const logElement = document.getElementById("log");
+    logElement.appendChild(division);
+    logElement.scrollTop = logElement.scrollHeight;
   },
 
-  render(game) {
-    // Phase banner
-    document.getElementById("phase-banner").textContent =
-      game.phase === "trade" ? "Phase d'échange" : "Phase de révélation";
 
-    // River
-    const riverEl = document.getElementById("river-cards");
-    riverEl.innerHTML = "";
+  render(game) {
+    /*
+    Gère l'affichage du jeu complet, en gérant les différent éléments interactifs.
+    */
+
+    // Bannière de phase - Alterne entre "phase d'échange" et "phase de révélation" en fonction de la phase.
+    document.getElementById("phase-banner").textContent = (game.phase === "trade") ? "Phase d'échange" : "Phase de révélation";
+
+    // Rivière - Récupère les cartes présentes dans la rivière à partir de l'objet gamestate et créé une nouvelle division pour chaque carte récupérée.
+    const riverElement = document.getElementById("river-cards");
+    riverElement.innerHTML = "";  // On réinitialise la rivière à chaque fois, avant d'afficher la nouvelle.
     for (const card of game.river) {
-      const d = document.createElement("div");
-      d.className = "river-card";
-      d.textContent = card.value;
-      riverEl.appendChild(d);
+      const division = document.createElement("div");
+      division.className = "river-card";
+      division.textContent = card.value;
+      riverElement.appendChild(division);
     }
 
-    // Players
+    // Joueurs - 
     const row = document.getElementById("players-row");
     row.innerHTML = "";
     for (const [i, player] of game.players.entries()) {
       const block = document.createElement("div");
-      block.className = "player-block" +
-        (i === game.currentPlayerIndex ? " active" : "") +
-        (player.health_points <= 0 ? " eliminated" : "");
+      block.className = "player-block" + ((i === game.currentPlayerIndex) ? " active" : "") + ((player.health_points <= 0) ? " eliminated" : "");
       block.id = `pb-${i}`;
 
+      // La subdivision représentant la carte du joueur :
       const cardDiv = document.createElement("div");
-      cardDiv.className = "p-card" +
-        (game.phase === "reveal" || i === game.currentPlayerIndex ? " revealed" : "") +
-        (player.card && player.card.is_protected ? " protected" : "") +
-        (player.card && player.card.value === 12 ? " twelve" : "");
-      cardDiv.textContent = player.card ? player.card.value : "?";
+      cardDiv.className = "p-card" + 
+        ((game.phase === "reveal" || i === game.currentPlayerIndex) ? " revealed" : "") + // Gérer si la carte doit être affichée ou non (au tour du joueur et àla phase de révélation)
+        ((player.card && player.card.is_protected) ? " protected" : "") +
+        ((player.card && player.card.value === 12) ? " twelve" : "");
+      cardDiv.textContent = (player.card) ? player.card.value : "?";  // Si la carte est de valeur inconnue, ? est affiché.
 
       block.innerHTML = `<div class="p-name">${player.id}</div>
-                         <div class="p-hp">❤️ ${player.health_points}</div>`;
+                         <div class="p-hp">HP : ${player.health_points}</div>`; // ESSAYER DE METTRE UNE IMAGE POUR LE PTIT COEUR
       block.appendChild(cardDiv);
       row.appendChild(block);
     }
   },
 
+
   setActivePlayer(player) {
+    /*
+    Change le statut du joueur pour actif (le met en surbrillance, révèle sa carte, etc ...).
+    */
+
     document.getElementById("active-name").textContent = player.id;
     document.getElementById("active-card-display").textContent = player.card.value;
   },
 
+
   setButtons(labels, callback) {
+    /*
+    Créé les boutons disponibles pour l'action courante du joueur.
+    */
+
     const container = document.getElementById("action-buttons");
-    container.innerHTML = "";
+    container.innerHTML = ""; // On réinitialise les boutons à chaque fois pour n'afficher que ceux qui ont du sens.
+
     for (const label of labels) {
-      const btn = document.createElement("button");
-      btn.textContent = label;
-      btn.onclick = () => callback(label);
-      container.appendChild(btn);
+      const button = document.createElement("button");
+      button.textContent = label;
+      button.onclick = () => callback(label);
+      container.appendChild(button);
     }
   },
 
   clearButtons() {
     document.getElementById("action-buttons").innerHTML = "";
-    document.getElementById("active-name").textContent = "—";
+    document.getElementById("active-name").textContent = "—"; // Texte par défaut du joueur actif.
     document.getElementById("active-card-display").textContent = "";
   },
 
   showGameOver(loserId, survivors) {
-    document.getElementById("go-title").textContent = `${loserId} est éliminé !`;
-    document.getElementById("go-body").textContent =
+    document.getElementById("gameover-title").textContent = `${loserId} est éliminé !`; // On rempli les sections vides du html par ls infos qui vont bien
+    document.getElementById("gameover-body").textContent =
       survivors.length ? `Vainqueurs : ${survivors.join(", ")}` : "";
     document.getElementById("gameover").style.display = "flex";
+  },
+
+  showHelp(label) {
+    const title = document.getElementById("help-title");
+    const body  = document.getElementById("help-body");
+ 
+    if (label === "rules") {
+      title.textContent = "Règles du Jeu";
+      body.innerHTML = `
+        <p class="help-intro">Dans ce jeu, vous incarnez une créature préhistorique qui doit survivre aux catastrophes naturelles.</p>
+        <p>À chaque manche, chaque joueur reçoit une carte d'une valeur comprise entre <strong>1 et 11</strong>.
+        Le joueur qui possède la carte de plus faible valeur à la fin de la manche <span class="help-dmg">perd une vie</span>.
+        Le premier joueur à ne plus avoir de vie a perdu — tous les autres sont déclarés vainqueurs.</p>
+ 
+        <h3 class="help-section-title">Déroulement d'une manche</h3>
+        <div class="help-phases">
+          <div class="help-phase">
+            <div class="help-phase-num">I</div>
+            <div>
+              <strong>Phase d'échange</strong>
+              <p>À tour de rôle, chaque joueur peut garder sa carte, l'échanger avec la rivière, ou l'échanger avec le joueur suivant.</p>
+            </div>
+          </div>
+          <div class="help-phase">
+            <div class="help-phase-num">II</div>
+            <div>
+              <strong>Phase de révélation</strong>
+              <p>Les cartes sont retournées. Les effets s'appliquent, puis le joueur avec la carte la plus basse perd une vie.</p>
+            </div>
+          </div>
+        </div>
+ 
+        <p class="help-warning">⚠ Les effets de certaines cartes peuvent influencer la résolution de la manche !</p>
+      `;
+    }
+    else if (label === "cards-help") {
+      title.textContent = "Effets des Cartes";
+      body.innerHTML = `
+        <p class="help-intro">Certaines cartes possèdent des effets spéciaux qui s'activent dans la rivière ou lors de la révélation.</p>
+        <div class="help-cards">
+          <div class="help-card-row">
+            <div class="help-card-badge">1</div>
+            <div><strong>Météorite</strong><br>
+            Si la carte <strong>11</strong> est visible lors de la révélation, cette carte vaut <strong>12</strong>.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge protect">3</div>
+            <div><strong>Glaciation</strong><br>
+            La carte de plus basse valeur est <span class="help-prot">protégée</span>. C'est donc le joueur avec la <em>deuxième</em> carte la plus basse qui perd une vie.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge">4</div>
+            <div><strong>Canicule</strong> <span class="help-river-tag">Rivière</span><br>
+            Dès que cette carte apparaît dans la rivière, les joueurs possédant une carte de valeur <strong>6 ou plus</strong> sont révélés.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge">5</div>
+            <div><strong>Inondation</strong> <span class="help-river-tag">Rivière</span><br>
+            Dès que cette carte apparaît dans la rivière, une <strong>seconde carte</strong> est immédiatement ajoutée à la rivière.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge dmg">7</div>
+            <div><strong>Ouragan</strong><br>
+            Le joueur possédant la <span class="help-dmg">deuxième carte la plus basse</span> perd également une vie.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge protect">8</div>
+            <div><strong>Séisme</strong><br>
+            Les joueurs possédant une carte de valeur <span class="help-prot">5, 6 ou 7</span> sont protégés.</div>
+          </div>
+          <div class="help-card-row">
+            <div class="help-card-badge night">11</div>
+            <div><strong>Nuit</strong><br>
+            La nuit tombe — la carte <strong>1</strong> devient <strong>12</strong> pour cette manche.</div>
+          </div>
+        </div>
+      `;
+    }
+ 
+    document.getElementById("helpers-display").style.display = "flex";
+  },
+ 
+  hideHelp(label) {
+    document.getElementById("helpers-display").style.display = "none";
   }
+
 };
 // =============================================================
 
@@ -100,6 +203,25 @@ const CARD_EFFECTS = {
   11: "set_night"
 };
 const EFFECT_ORDER = [11, 1, 8, 3];
+
+const REGLES = `Bienvenue !\n\
+Dans ce jeu, vous incarnez une créature préhistorique qui doit survivre aux catastrophes naturelles. A chaque manche, chaque \n\
+joueur reçoit une carte d'une valeur comprise entre 1 et 11 et le joueur qui possède la carte de plus faible valeur à la fin\n\
+de la manche perd une vie. Le premier joueur à ne plus avoir de vie a perdu, tous les autres joueurs sont des vainqueurs.\n\
+Chaque manche contient deux phases :\n\
+- Une phase d'échange\n\
+- Une phase de révélation\n\
+Attention ! Les effets de certaines cartes peuvent influencer la résolution de la manche lors de la révélation des cartes ...\n\n\
+Bon courage !\n`;
+
+const CARDS_HELP = `\nEffets des cartes :\n\
+1] La carte 1 vaut 12 si la carte 11 est l'une des cartes visibles lors de la phase de révélation.\n\
+3] Le joueur qui a la carte de plus basse valeur est protégé. Le joueur possédant la 2e carte de plus basse valeur non protégée perd donc une vie.\n\
+4] Dès que la carte 4 apparaît dans la rivière, les joueurs possédant une carte de valeur 6 ou plus sont révélés.\n\
+5] Dès que la carte 5 apparaît dans la rivière, une seconde carte est immédiatement rajoutée à la rivière pour cette manche.\n\
+7] Le joueur possédant la deuxième carte de plus basse valeur perd également une vie.\n\
+8] Les joueurs possédant une carte de valeur comprise entre 5 et 7 sont protégés.\n\
+11] La nuit tombe, la carte 1 devient 12.\n\n`;
 
 function effect_priority(item) {
   /*
@@ -440,7 +562,7 @@ class GameState {
   }
 
 
-  // ---------- Phase de révélation (identique) ----------
+  // ---------- Phase de révélation ----------
   resolve_reveal() {
     /*
     Révèle toutes les cartes, applique les effets et désigne le perdant.
@@ -448,6 +570,8 @@ class GameState {
 
     // Les cartes des joueurs sont affichées.
     for (const player of this.players) ui.log(`${player.id} : ${player.card.value}`);
+    // La rivière également
+    for (const card of this.river) ui.log(`Rivière : ${card.value}`);
 
     this.apply_effects();
     if (!this.is_in_game) return "end"; 
@@ -625,31 +749,38 @@ class GameState {
 
 
 // --------------------------------------------------------------------
-// Setup UI
+// Mise en place de l'interface (démarrage du jeu)
 
 const nInput = document.getElementById("n-players");
-const nameInputs = document.getElementById("name-inputs");
+const playersNames = document.getElementById("name-inputs");
 
-function rebuildNameInputs() {
-  const n = parseInt(nInput.value) || 3;
-  nameInputs.innerHTML = "";
-  for (let i = 0; i < n; i++) {
-    const inp = document.createElement("input");
-    inp.type = "text";
-    inp.placeholder = `Joueur ${i + 1}`;
-    inp.id = `pname-${i}`;
-    nameInputs.appendChild(inp);
+function rebuildPlayersNames() {
+  const nb_players = parseInt(nInput.value) || 3;  // Le nombre de joueurs récupéré est sous forme de string, on doit le convertir en int avec la fonction parseInt()
+  playersNames.innerHTML = "";  // On réinitialise les précédents noms de joueurs ...
+  for (let i = 0; i < nb_players; i++) {
+    const player = document.createElement("input");
+    player.type = "text";
+    player.placeholder = `Joueur ${i + 1}`;   // Si le joueur ne rentre pas de nom, alors son nom sera défini comme Joueur x par défaut. C'est également le texte placeholder de la ligne de saisie.
+    player.id = `pname-${i}`;
+    playersNames.appendChild(player);
   }
 }
-nInput.addEventListener("change", rebuildNameInputs);
-rebuildNameInputs();
+
+
+nInput.addEventListener("change", rebuildPlayersNames);   // Lorsqu'on
+rebuildPlayersNames();
+
+// Initialisation des aides :
+document.getElementById("rules").addEventListener("click", () => ui.showHelp("rules"));
+document.getElementById("cards-help").addEventListener("click", () => ui.showHelp("cards-help"));
+document.getElementById("help-close").addEventListener("click", () => ui.hideHelp());
 
 document.getElementById("btn-start").addEventListener("click", () => {
-  const n = parseInt(nInput.value);
-  if (n < 3 || n > 6) { alert("Entre 3 et 6 joueurs."); return; }
+  const nb_players = parseInt(nInput.value);
+  if (nb_players < 3 || nb_players > 6) { alert("Entre 3 et 6 joueurs."); return; }
 
   const names = [];
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < nb_players; i++) {
     const v = document.getElementById(`pname-${i}`).value.trim();
     names.push(v || `J${i + 1}`);
   }
@@ -657,7 +788,7 @@ document.getElementById("btn-start").addEventListener("click", () => {
   document.getElementById("setup").style.display = "none";
   document.getElementById("game").style.display = "flex";
 
-  const game = new GameState(n, names);
+  const game = new GameState(nb_players, names);
   game.start().catch(console.error);
 });
 // --------------------------------------------------------------------

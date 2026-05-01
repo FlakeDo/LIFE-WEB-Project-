@@ -12,45 +12,83 @@
 
 <body>
 
-<h1>🦕 SURVIVE!</h1>
+<h1>SURVIVE!</h1>
 
-<!-- ===== SETUP ===== -->
+<!-- PRÉPARATION DE PARTIE -->
 <section id="setup">
   <div>
     <label for="n-players">Nombre de joueurs (3–6) : </label>
     <input type="number" id="n-players" min="3" max="6" value="3">
   </div>
-  <div id="name-inputs"></div>
+
+  <div id="name-inputs">
+  </div>
+
   <button id="btn-start">Commencer la partie</button>
 </section>
 
-<!-- ===== GAME ===== -->
+<!-- IN GAME -->
 <section id="game">
-  <div id="phase-banner">Phase d'échange</div>
 
-  <div id="players-row"></div>
+  <!-- Bannière de phase -->
+  <div id="phase-banner"></div>
 
+  <!-- Joueurs -->
+  <div id="players-row">
+  </div>
+
+  <!-- Affichage de la rivière -->
   <div id="river-section">
     <h2>Rivière</h2>
-    <div id="river-cards"></div>
+    <div id="river-cards">
+    </div>
   </div>
 
+  <!-- Zone d'aides -->
+  <div id="helpers">
+    <button id="rules">Règles</button>
+    <button id="cards-help">Cartes</button>
+  </div>
+
+
+  <!-- Zone d'action du joueur -->
   <div id="active-panel">
-    <h2>Tour de <span id="active-name">—</span></h2>
-    <div id="active-card-display">?</div>
-    <div id="action-buttons"></div>
+    <h2>Tour de <span id="active-name"></span></h2>
+
+    <div id="active-card-display">
+    </div>
+
+    <div id="action-buttons">
+    </div>
   </div>
 
+  <!-- Affichage des événements -->
   <div id="log-section">
     <h2>Événements</h2>
-    <div id="log"></div>
+
+    <div id="log">
+    </div>
   </div>
 </section>
 
-<!-- ===== GAME OVER ===== -->
+
+
+<!-- ÉCRAN D'AIDE -->
+<div id="helpers-display">
+  <div id="helpers-panel">
+    <h2 id="help-title"></h2>
+    <div id="help-body"></div>
+    <button id="help-close">Fermer</button>
+  </div>
+</div>
+
+
+<!-- ÉCRAN DE GAME OVER -->
 <div id="gameover">
-  <h2 id="go-title">Fin de partie</h2>
-  <p id="go-body"></p>
+  <h2 id="gameover-title"></h2> <!-- Titre vide qui sert à afficher le perdant à la fin de la partie. -->
+
+  <p id="gameover-body"></p>  <!-- Paragraphe vide qui sert à afficher les infos de fin de partie. -->
+
   <button onclick="location.reload()">Nouvelle partie</button>
 </div>
 
