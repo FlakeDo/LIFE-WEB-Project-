@@ -50,14 +50,6 @@ def handle_options():
 
 
 
-'''
-Bonjour je suis M. rioual, je suis venu aux 
-urgences il y a deux jours pour une fracture du cartilage
-et des points de suture à l'oreille, et on m'a dit qu'il 
-fallait absolument que je vois l'ORL en ce début de 
-semaine, aujourd'hui ou demain. Ca serait possible ?
-'''
-
 # Le reste est en grande partie repris du prototype écrit en Python, avec les 
 # modifications nécessaires pour effectuer des demandes. La classe gamestate est 
 # globalment remplacée par un état de la partie qui est modifié puis envoyé au 
