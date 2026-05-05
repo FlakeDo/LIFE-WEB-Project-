@@ -16,6 +16,40 @@
 
 <!-- PRÉPARATION DE PARTIE -->
 <section id="setup">
+  <div id="setup-rules">
+    <div id="setup-rules-panel">
+
+      <h2 id="setup-rules-title">Règles du jeu</h2>
+
+      <div id="setup-rules-body">
+        <p class="help-intro">Dans ce jeu, vous incarnez une créature préhistorique qui doit survivre aux catastrophes naturelles.</p>
+            <p>À chaque manche, chaque joueur reçoit une carte d'une valeur comprise entre <strong>1 et 11</strong>.
+            Le joueur qui possède la carte de plus faible valeur à la fin de la manche <span class="help-dmg">perd une vie</span>.
+            Le premier joueur à ne plus avoir de vie a perdu — tous les autres sont déclarés vainqueurs.</p>
+    
+            <h3 class="help-section-title">Déroulement d'une manche</h3>
+            <div class="help-phases">
+              <div class="help-phase">
+                <div class="help-phase-num">I</div>
+                <div>
+                  <strong>Phase d'échange</strong>
+                  <p>À tour de rôle, chaque joueur peut garder sa carte, l'échanger avec la rivière, ou l'échanger avec le joueur suivant.</p>
+                </div>
+              </div>
+              <div class="help-phase">
+                <div class="help-phase-num">II</div>
+                <div>
+                  <strong>Phase de révélation</strong>
+                  <p>Les cartes sont retournées. Les effets s'appliquent, puis le joueur avec la carte la plus basse perd une vie.</p>
+                </div>
+              </div>
+            </div>
+    
+            <p class="help-warning">Les effets de certaines cartes peuvent influencer la résolution de la manche !</p>
+          </div>
+      </div>
+  </div>
+
   <div>
     <label for="player-name">Ton nom :</label>
     <input type="text" id="player-name" autocomplete="off">
@@ -28,7 +62,7 @@
   <!-- Visible par tous, mais seul l'hôte clique dessus une fois tous prêts -->
   <button id="btn-launch" disabled>Lancer la partie</button>
 
-  <p id="setup-hint">L'hôte clique sur "Lancer" une fois que tous les joueurs ont rejoint.</p>
+  <p id="setup-hint">Les joueurs cliquent sur "Lancer" une fois que tous le monde a rejoint.</p>
 </section>
 
 <!-- IN GAME -->

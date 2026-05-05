@@ -97,11 +97,11 @@ state = {
     "survivors": []
 }
 
-def log(msg):
+def log(msg, cls = "log-event"):
     '''Ajoute un message a afficher dans la console. Seulement
     50 messags sont sauvgardés.'''
 
-    state["log"].append(msg)
+    state["log"].append([msg, cls])
     if len(state["log"]) > 50:
         state["log"].pop(0)
 
@@ -180,27 +180,27 @@ def apply_effects():
 
 def _set_night():
     state["is_night"] = True
-    log("La nuit tombe ! (carte 11)")
+    log("La nuit tombe ! (carte 11)", "log-effect")
 
 def _twelve_if_night():
     if state["is_night"]:
         for p in state["players"]:
             if p["card_value"] == 1:
                 p["card_value"] = 12
-                log(f"La carte de {p['id']} devient 12 !")
+                log(f"La carte de {p['id']} devient 12 !", "log-effect")
 
 def _protect_lowest():
     m = get_min_card()
     for p in state["players"]:
         if p["card_value"] == m:
             p["card_protected"] = True
-            log(f"{p['id']} est protégé (carte 3)")
+            log(f"{p['id']} est protégé (carte 3)", "log-protect")
 
 def _protect_five_to_seven():
     for p in state["players"]:
         if p["card_value"] in (5, 6, 7):
             p["card_protected"] = True
-            log(f"{p['id']} est protégé (carte 8)")
+            log(f"{p['id']} est protégé (carte 8)", "log-protect")
 
 def _hurt_two_lowest():
     m = get_min_card()
@@ -212,15 +212,15 @@ def _hurt_two_lowest():
     if sec:
         for p in state["players"]:
             if p["card_value"] == sec:
-                log(f"{p['id']} perd une vie ! (carte 7)")
+                log(f"{p['id']} perd une vie ! (carte 7)", "log-damage")
                 _lose_hp(p)
 
 def _reveal_six_or_more():
     names = [p["id"] for p in state["players"] if p.get("card_value", 0) > 5]
-    if names: log(f"Carte 4 — joueurs ≥ 6 : {', '.join(names)}")
+    if names: log(f"Carte 4 — joueurs ≥ 6 : {', '.join(names)}", "log-effect")
 
 def _widen_river():
-    log("Carte 5 — rivière élargie !")
+    log("Carte 5 — rivière élargie !", "log-effect")
     add_river()
 
 # --------------------------------------------------------------------------
@@ -235,7 +235,7 @@ def _lose_hp(player):
     if player["hp"] <= 0:
         state["game_over"] = True
         state["loser"] = player["id"]
-        log(f"{player['id']} est éliminé !")
+        log(f"{player['id']} est éliminé !", "log-damage")
 
 def resolve_reveal():
     '''Résoud la phase de révélation.'''
@@ -245,11 +245,11 @@ def resolve_reveal():
     m = get_min_card()
     nb_protected = sum(1 for p in state["players"] if p["card_protected"])
     if nb_protected == len(state["players"]):
-        log("Personne ne perd de vie !")
+        log("Personne ne perd de vie !", "log-protect")
     else:
         for p in state["players"]:
             if p["card_value"] == m:
-                log(f"{p['id']} perd une vie ! (carte la plus basse)")
+                log(f"{p['id']} perd une vie ! (carte la plus basse)", "log-damage")
                 _lose_hp(p)
                 break
 
@@ -287,7 +287,7 @@ def start():
         state["active_index"] = 0
         reset_round()
         state["log"] = []
-        log("── Nouvelle manche ──")
+        log("── Nouvelle manche ──", "log-effect")
 
         return cors({"ok": True})
 
@@ -380,7 +380,7 @@ def action():
             if not state["game_over"]:
                 state["phase"] = "trade"
                 reset_round()
-                log("── Nouvelle manche ──")
+                log("── Nouvelle manche ──", "log-effect")
 
         return cors({"ok": True})
 
@@ -402,7 +402,7 @@ def end():
         state["game_over"] = False
         state["loser"] = None
 
-        log("La partie a été annulée. Veuillez appuyer sur le bouton annuler la partie pour retourner au menu précédent.")
+        log("La partie a été annulée. Veuillez appuyer sur le bouton annuler la partie pour retourner au menu précédent.", "log-effect")
 
         return cors({"ok": True})
 

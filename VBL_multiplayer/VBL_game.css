@@ -46,6 +46,29 @@
   #setup-hint  { color: var(--labels);  font-size: .8rem; font-style: italic; }
 
 
+  #setup-rules {text-align: left;}
+
+   #setup-rules-panel {
+    background: var(--sub-bg); border: 1px solid var(--sub-border);
+    border-radius: 10px; padding: 28px 32px;
+    width: min(660px, 92vw); max-height: 85vh;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+ 
+  /* Titre */
+  #setup-rules-title {
+    font-size: .8rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--accent); padding-bottom: 12px;
+    border-bottom: 1px solid var(--sub-border);
+    margin-bottom: 4px;
+  }
+ 
+  /* Corps */
+  #setup-rules-body { display: flex; flex-direction: column; gap: 12px; }
+  #setup-rules-body p      { color: var(--text); font-size: .9rem; line-height: 1.8; }
+  #setup-rules-body strong { color: var(--accent); }
+
+
   /* Paramètrage des boutons */
   button {
     cursor: pointer; border: 1px solid var(--sub-border);

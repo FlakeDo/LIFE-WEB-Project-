@@ -107,7 +107,7 @@ const ui = {
     el.innerHTML = "";
     for (const msg of entries) {
       const d = document.createElement("div");
-      d.className = "log-event"; d.textContent = msg;
+      d.className = msg[1]; d.textContent = msg[0];
       el.appendChild(d);
     }
     el.scrollTop = el.scrollHeight;
@@ -150,7 +150,7 @@ const ui = {
           </div>
         </div>
  
-        <p class="help-warning">⚠ Les effets de certaines cartes peuvent influencer la résolution de la manche !</p>
+        <p class="help-warning">Les effets de certaines cartes peuvent influencer la résolution de la manche !</p>
       `;
     }
     else if (label === "cards-help") {
