@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survive!</title>
+
+<link rel="stylesheet" type="text/css" href="VBL_game.css" />
+
+</head>
+
+<body>
+
+<h1>Very Bad Lands</h1>
+
+<!-- PRÉPARATION DE PARTIE -->
+<section id="setup">
+  <div id="setup-rules">
+    <div id="setup-rules-panel">
+
+      <h2 id="setup-rules-title">Règles du jeu</h2>
+
+      <div id="setup-rules-body">
+        <p class="help-intro">Dans ce jeu, vous incarnez une créature préhistorique qui doit survivre aux catastrophes naturelles.</p>
+            <p>À chaque manche, chaque joueur reçoit une carte d'une valeur comprise entre <strong>1 et 11</strong>.
+            Le joueur qui possède la carte de plus faible valeur à la fin de la manche <span class="help-dmg">perd une vie</span>.
+            Le premier joueur à ne plus avoir de vie a perdu — tous les autres sont déclarés vainqueurs.</p>
+    
+            <h3 class="help-section-title">Déroulement d'une manche</h3>
+            <div class="help-phases">
+              <div class="help-phase">
+                <div class="help-phase-num">I</div>
+                <div>
+                  <strong>Phase d'échange</strong>
+                  <p>À tour de rôle, chaque joueur peut garder sa carte, l'échanger avec la rivière, ou l'échanger avec le joueur suivant.</p>
+                </div>
+              </div>
+              <div class="help-phase">
+                <div class="help-phase-num">II</div>
+                <div>
+                  <strong>Phase de révélation</strong>
+                  <p>Les cartes sont retournées. Les effets s'appliquent, puis le joueur avec la carte la plus basse perd une vie.</p>
+                </div>
+              </div>
+            </div>
+    
+            <p class="help-warning">Les effets de certaines cartes peuvent influencer la résolution de la manche !</p>
+          </div>
+      </div>
+  </div>
+
+  <div>
+    <label for="player-name">Ton nom :</label>
+    <input type="text" id="player-name" autocomplete="off">
+  </div>
+
+  <div id="join-status"></div>
+
+  <button id="btn-join">Rejoindre la partie</button>
+
+  <!-- Visible par tous, mais seul l'hôte clique dessus une fois tous prêts -->
+  <button id="btn-launch" disabled>Lancer la partie</button>
+
+  <p id="setup-hint">Les joueurs cliquent sur "Lancer" une fois que tous le monde a rejoint.</p>
+</section>
+
+<!-- IN GAME -->
+<section id="game">
+
+  <!-- Bannière de phase -->
+  <div id="phase-banner"></div>
+
+  <!-- Joueurs -->
+  <div id="players-row">
+  </div>
+
+  <!-- Affichage de la rivière -->
+  <div id="river-section">
+    <h2>Rivière</h2>
+    <div id="river-cards">
+    </div>
+  </div>
+
+  <!-- Zone d'aides -->
+  <div id="helpers">
+    <button id="rules">Règles</button>
+    <button id="cards-help">Cartes</button>
+  </div>
+
+
+  <!-- Zone d'action du joueur -->
+  <div id="active-panel">
+    <h2>Tour de <span id="active-name"></span></h2>
+
+    <div id="active-card-display">
+    </div>
+
+    <div id="action-buttons">
+    </div>
+  </div>
+
+  <!-- Affichage des événements -->
+  <div id="log-section">
+    <h2>Événements</h2>
+
+    <div id="log">
+    </div>
+  </div>
+
+  <button id="btn-abort">Annuler la Partie</button>
+</section>
+
+
+
+<!-- ÉCRAN D'AIDE -->
+<div id="helpers-display">
+  <div id="helpers-panel">
+    <h2 id="help-title"></h2>
+    <div id="help-body"></div>
+    <button id="help-close">Fermer</button>
+  </div>
+</div>
+
+
+<!-- ÉCRAN DE GAME OVER -->
+<div id="gameover">
+  <h2 id="gameover-title"></h2> <!-- Titre vide qui sert à afficher le perdant à la fin de la partie. -->
+
+  <p id="gameover-body"></p>  <!-- Paragraphe vide qui sert à afficher les infos de fin de partie. -->
+
+  <button id="gameover-btn">Nouvelle partie</button>
+</div>
+
+<script src="VBL_client.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+/*####################ACCUEIL########################*/
+/*et les autres bodys */
+
+body.accueil{
+/*background-color: rgb(33, 65, 25); */
+background-image: url("images/fond_vert.jpg");
+  
+
+}
+
+body.epoque1{
+/*background-color: rgb(33, 65, 25); */
+background-image: url("images/fond_vert.jpg");
+  
+}
+
+body.epoque2{
+/*background-color: rgb(33, 65, 25); */
+background-image: url("images/fond_vert.jpg");
+  
+}
+
+body.epoque3{
+/*background-color: rgb(33, 65, 25); */
+background-image: url("images/fond_vert.jpg");
+  
+}
+
+
+#fond_accueil {
+  background-color: #1f3b2c;
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  min-height: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+#titre1{
+  font-family: "Exo 2";
+  font-size: 40px; 
+  color: rgb(213, 249, 207);
+  text-align: center;
+}
+
+#titre2{
+  color: aliceblue;
+  text-align: center;
+}
+
+#titre3{
+  color: rgb(176, 220, 185);
+  border-radius: 10%;
+  text-align: center;
+}
+
+#texte_intro{
+  color: aliceblue;
+  font-size: 20px;
+  /*font-family: "Playwrite DE SAS", cursive;*/
+  font-family: "Exo 2", sans-serif;
+  margin-bottom: 20px; /* contrôle l’espace */
+  line-height: 1.5;
+
+
+
+}
+
+#frise{
+display: block;
+  margin: 0 auto;
+
+}
+
+
+#montre_choix {
+  margin: 20px auto 0 auto; 
+  padding: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#images {
+  position: relative;
+  width: min(350px, 90vw); 
+  margin: 20px auto; 
+}
+
+#montre {
+  width: 100%;
+  height: auto; 
+  display: block;
+
+}
+
+#fleche {
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  width: 45%;
+  max-width: 200px;
+
+  transform: translate(-50%, -50%);
+  transform-origin: center center; 
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+}
+
+/*##################EPOQUE1#####################"""*/
+
+#titre_epoque1{
+  color: aliceblue;
+  text-align: center;
+
+}
+
+#texte_epoque1{
+  font-family: "Exo 2";
+  font-size: 20px; 
+  color: rgb(213, 249, 207);
+  text-align: center;
+
+}
+
+#fond_epoque1{
+ background-color: #1f3b2c;
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+
+
+}
+
+#proteropaleo{
+  align-items: center;
+  border-radius: 5%;
+  width: 590px;
+  height: 320px;
+}
+
+
+.espace_jouer1{
+  width: 300px;
+  padding: 20px;
+  background-color: #335242;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  margin: 20px;
+  transition: transform 0.2s ease;
+}
+
+.espace_jouer1:hover {
+  transform: scale(1.05);
+}
+
+.ligne_epoque1{
+
+ display: flex;
+  align-items: center;      
+  justify-content: center;  
+  gap: 40px;                
+  margin-top: 30px;
+
+
+}
+
+#Jouer1 {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+#Jouer1:hover{
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Click (effet pressé) */
+#Jouer1:active {
+  transform: translateY(0px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#Jouer1{
+
+  display: block;
+  margin: 20px auto;
+
+
+}
+
+/*########################EPOQUE2#########################*/
+
+
+#titre_epoque2{
+  color: aliceblue;
+  text-align: center;
+
+}
+
+#texte_epoque2{
+  font-family: "Exo 2";
+  font-size: 20px; 
+  color: rgb(213, 249, 207);
+  text-align: center;
+
+}
+
+.fond_epoque2{
+ background-color: #1f3b2c;
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+
+
+}
+
+#paleo{
+  border-radius: 5%;
+  width: 500px;
+  height: 340px;
+}
+
+
+.espace_jouer2{
+  width: 300px;
+  padding: 20px;
+  background-color: #335242;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  margin: 20px;
+  transition: transform 0.2s ease;
+}
+
+.espace_jouer2:hover {
+  transform: scale(1.05);
+}
+
+#paleo,
+.espace_jouer2 {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 80px;
+}
+
+
+
+
+#Jouer2{
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+#Jouer2:hover{
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+#Jouer2:active {
+  transform: translateY(0px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#Jouer2{
+
+  display: block;
+  margin: 20px auto;
+
+
+}
+
+
+/*#########################EPOQUE3#######################*/
+#titre_epoque3{
+  color: aliceblue;
+  text-align: center;
+
+}
+
+#texte_epoque3{
+  font-family: "Exo 2";
+  font-size: 20px; 
+  color: rgb(213, 249, 207);
+  text-align: center;
+
+}
+
+.fond_epoque3{
+ background-color: #1f3b2c;
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+
+
+}
+
+
+
+.espace_jouer3{
+  width: 300px;
+  padding: 20px;
+  background-color: #335242;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  margin: 20px;
+  transition: transform 0.2s ease;
+  margin-bottom: 70px;
+  margin-top: -30px;
+  margin-left: 120px;
+}
+
+.espace_jouer3:hover {
+  transform: scale(1.05);
+}
+
+#mesozo, #mesozooo,
+.espace_jouer3 {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#mesozoo{
+  align-items: center;
+  border-radius: 5%;
+  width : 400px;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+#mesozooo{
+  align-items: center;
+  border-radius: 5%;
+  width: 600px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+
+
+
+#Jouer3{
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+#Jouer3:hover{
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+#Jouer3:active {
+  transform: translateY(0px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#Jouer3{
+
+  display: block;
+  margin: 20px auto;
+
+
+}
+
+/*###########################################*/
+
+.footer{
+  width: 100%;
+  padding: 8px 0;
+  margin-top: 60px;
+  text-align: center;
+
+  background-color: #203127;
+
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+
+}
+
+.btn-accueil{
+
+  color :rgb(86, 134, 119)
+}
+
+
+
+

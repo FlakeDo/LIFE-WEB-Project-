@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test de personnalité</title>
+
+    <link rel="stylesheet" href="style_test.css">
+<link rel="icon" href="terre_pas.jpg" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cause:wght@100..900&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
+
+
+</head>
+<body class="test">
+
+<h1 id="titre_test">A quelle catégorie d'animal correspondrais-tu lors de l'époque des dinosaures ?</h1>
+
+
+<div id="main">
+  <form id="quizForm">
+    <div>
+      <p>Que ferais-tu dans un monde rempli de dinosaures ?</p>
+      <label><input type="radio" name="q1" value="1"> Observer discrètement et apprendre</label><br>
+      <label><input type="radio" name="q1" value="2"> Explorer et interagir avec tout</label><br>
+      <label><input type="radio" name="q1" value="3"> Courir, chasser et survivre</label>
+    </div>
+
+    <div>
+      <p>Quelle serait ta stratégie de survie ?</p>
+      <label><input type="radio" name="q2" value="1"> Analyser et planifier</label><br>
+      <label><input type="radio" name="q2" value="2"> Suivre ton instinct</label><br>
+      <label><input type="radio" name="q2" value="3"> T’appuyer sur un groupe</label>
+    </div>
+
+    <div>
+      <p>Ton habitat idéal à l’époque des dinosaures ?</p>
+      <label><input type="radio" name="q3" value="1"> Une grotte calme et protégée</label><br>
+      <label><input type="radio" name="q3" value="2"> Une jungle dense et vivante</label><br>
+      <label><input type="radio" name="q3" value="3"> Une vaste plaine sauvage</label>
+    </div>
+
+    <div>
+      <p>Face à un danger, tu :</p>
+      <label><input type="radio" name="q4" value="1"> Cherches une solution intelligente</label><br>
+      <label><input type="radio" name="q4" value="2"> Réagis immédiatement</label><br>
+      <label><input type="radio" name="q4" value="3"> Appelles ou rejoins ton groupe</label>
+    </div>
+
+    <div>
+      <p>Quelle caractéristique te correspond le mieux ?</p>
+      <label><input type="radio" name="q5" value="1"> Intelligent et prudent</label><br>
+      <label><input type="radio" name="q5" value="2"> Rapide et audacieux</label><br>
+      <label><input type="radio" name="q5" value="3"> Loyal et protecteur</label>
+    </div>
+      <br>
+      <button type="button" onclick="calculerResultat()" id="btn_res_test">Voir mon résultat</button>
+    </form>
+
+
+    <div id="result_container">
+      <h2 id="resultat"></h2>
+      <img id="img_resultat" alt="image résultat dinosaure" style="display:none;">
+    </div>
+
+</div>
+
+
+<h2 id="resultat"></h2>
+<img id="img_resultat" alt="image résultat dinosaure" style="display:none;">
+
+<footer class="footer">
+  <a href="page_accueil.html" class="btn-accueil">Accueil</a>
+</footer>
+
+  <script src="fichier.js"></script>
+
+</body>
+
+</html>
